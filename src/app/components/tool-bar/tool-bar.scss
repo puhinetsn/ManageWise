@@ -1,0 +1,53 @@
+@use "mixins" as *;
+@use "sass:map";
+
+.toolbar {
+  @include flex(column, center);
+  align-items: flex-start;
+  padding: 10px;
+  &_form {
+    width: 100%;
+    @include flex(column, center);
+    align-content: center;
+    &_input {
+      width: 100%;
+    }
+  }
+
+  &_employees {
+    @include flex(row, space-around);
+    width: 100%;
+  }
+}
+
+@include md {
+  .toolbar {
+    padding: 20px;
+    align-items: center;
+    &_form {
+      width: 70%;
+    }
+  }
+}
+
+@include lg {
+  .toolbar {
+    @include flex(row, center);
+    align-items: flex-start;
+    gap: 25px;
+
+    &_form {
+      width: 50%;
+      @include flex(column, center);
+      align-content: center;
+      &_input {
+        width: 100%;
+      }
+    }
+
+    &_employees {
+      @include flex(row, space-between);
+      width: 30%;
+    }
+  }
+}
