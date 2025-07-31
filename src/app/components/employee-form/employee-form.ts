@@ -49,7 +49,7 @@ export class EmployeeForm {
   readonly dialogRef = inject(MatDialogRef<EmployeeForm>);
   formBuilder = inject(FormBuilder);
   employee = new FormGroup({
-    full_name: new FormControl<string>('', {
+    fullName: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(3)],
     }),
@@ -61,7 +61,7 @@ export class EmployeeForm {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    start_date: new FormControl<Date | null>(null, {
+    startDate: new FormControl<Date | null>(null, {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -134,7 +134,7 @@ export class EmployeeForm {
   }
 
   validateEmployeeFullName() {
-    const employeeFullName = this.employee.controls.full_name;
+    const employeeFullName = this.employee.controls.fullName;
     if (employeeFullName.touched && employeeFullName.invalid) {
       if (employeeFullName.hasError('required')) {
         return 'Name is required.';
@@ -168,7 +168,7 @@ export class EmployeeForm {
   }
 
   validateEmployeeStartDate() {
-    const employeeStartDate = this.employee.controls.start_date;
+    const employeeStartDate = this.employee.controls.startDate;
     if (employeeStartDate.touched && employeeStartDate.invalid) {
       if (employeeStartDate.hasError('required')) {
         return 'Start Date is required.';

@@ -8,6 +8,10 @@ export class EmployeeService {
   employees = signal<Employee[]>([]);
   initialId: number = 1;
 
+  constructor() {
+    this.loadFromLocalStorage();
+  }
+
   createEmployee(info: EmployeeFields) {
     this.employees.update((current) => [
       ...current,
@@ -18,5 +22,23 @@ export class EmployeeService {
     ]);
     localStorage.setItem('employees', JSON.stringify(this.employees()));
     this.initialId += 1;
+  }
+
+  loadFromLocalStorage() {
+    const employeeList = localStorage.getItem('employees');
+    if (employeeList) {
+      const employeesParsed = JSON.parse(employeeList);
+      this.employees.set(employeesParsed);
+
+      const maxId = employeesParsed.reduce(
+        (max: number, emp: Employee) => Math.max(max, emp.id),
+        0
+      );
+      this.initialId = maxId + 1;
+    }
+  }
+
+  getEmployees(): Employee[] {
+    return this.employees();
   }
 }

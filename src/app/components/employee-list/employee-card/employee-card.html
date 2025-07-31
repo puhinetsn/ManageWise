@@ -1,0 +1,26 @@
+<div class="card_container">
+  @if(customInfo()){
+  <ng-container *ngTemplateOutlet="infoTemplate(); context: this.employee()">
+  </ng-container>
+  } @else {
+  <h2 class="text-primary">{{ employee().fullName }}</h2>
+  <h3 class="text-primary">{{ employee().email }}</h3>
+  <h4 class="text-secondary">Position: {{ employee().position }}</h4>
+  <p class="text-secondary">
+    Start date: {{ employee().startDate | date : "fullDate" }}
+  </p>
+  } @if(showSkills()){
+  <div class="card_skills">
+    @for (skill of employee().skills; track $index){
+    <mat-chip>{{ skill.skill }} - {{ skill.yearExperience }} y.</mat-chip>
+    }
+  </div>
+  } @if(customActions()){
+  <ng-container *ngTemplateOutlet="actionsTemplate()"> </ng-container>
+  }@else {
+  <div class="card_actions">
+    <mat-icon class="text-secondary">edit</mat-icon>
+    <mat-icon class="text-secondary">delete</mat-icon>
+  </div>
+  }
+</div>

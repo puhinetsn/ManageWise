@@ -1,0 +1,36 @@
+<div class="employees_container">
+  @for (employee of employees(); track employee.id){
+  <app-employee-card
+    [employee]="employee"
+    [infoTemplate]="cardInfoTemplate"
+    [actionsTemplate]="cardActionsTemplate"
+    [showSkills]="showSkills()"
+    [customActions]="customActions()"
+    [customInfo]="customInfo()"
+  >
+  </app-employee-card>
+
+  }
+</div>
+
+<ng-template
+  #cardInfoTemplate
+  let-fullName="fullName"
+  let-email="email"
+  let-position="position"
+  let-startDate="startDate"
+>
+  <div class="template_info">
+    <h4 class="text-primary">Position: {{ position }}</h4>
+    <p class="text-primary">Start date: {{ startDate | date : "fullDate" }}</p>
+    <h2 class="text-secondary">{{ fullName }}</h2>
+    <h3 class="text-secondary">{{ email }}</h3>
+  </div>
+</ng-template>
+
+<ng-template #cardActionsTemplate>
+  <div class="template_actions">
+    <p class="text-secondary">edit</p>
+    <p class="text-secondary">delete</p>
+  </div>
+</ng-template>

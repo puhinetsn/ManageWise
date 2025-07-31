@@ -1,0 +1,37 @@
+@use "mixins" as *;
+@use "variables" as vars;
+@use "sass:map";
+
+.card {
+  &_container {
+    box-shadow: vars.$basic_shadow;
+    border-radius: 15px;
+    padding: 20px 15px;
+    @include flex(column, space-between);
+    align-items: flex-start;
+    gap: 5px;
+    height: max-content;
+  }
+
+  &_skills {
+    @include flex(row, flex-start);
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  &_actions {
+    width: 100%;
+    @include flex(row, flex-end);
+    gap: 20px;
+    padding: 5px 0;
+  }
+}
+
+@include md {
+  .card {
+    &_container {
+      width: 400px;
+    }
+  }
+}
