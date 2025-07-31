@@ -1,0 +1,35 @@
+@use "mixins" as *;
+@use "variables" as vars;
+@use "sass:map";
+
+.header {
+  &_container {
+    @include flex(row, center);
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  &_img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@include md {
+  .header {
+    &_container {
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    &_text {
+      font-size: map.get(vars.$font_size, "3xl");
+    }
+
+    &_img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}

@@ -1,0 +1,88 @@
+<h3 mat-dialog-title class="form_title">
+  Enter Information About New Employee
+</h3>
+<mat-dialog-content>
+  <form [formGroup]="employee" class="form_container">
+    <mat-form-field appearance="fill" class="form_input">
+      <mat-label>Employee Full Name</mat-label>
+      <input matInput id="name" type="text" formControlName="full_name" />
+      <mat-error>{{ this.validateEmployeeFullName() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form_input">
+      <mat-label>Employee Email</mat-label>
+      <input matInput id="email" type="email" formControlName="email" />
+      <mat-error>{{ this.validateEmployeeEmail() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form_input">
+      <mat-label for="priority">Choose Position:</mat-label>
+      <mat-select formControlName="position">
+        @for (option of positionSelectOptions; track option) {
+        <div>
+          <mat-option [value]="option.value">{{ option.name }}</mat-option>
+        </div>
+        }
+      </mat-select>
+      <mat-error>{{ this.validateEmployeePosition() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form_input">
+      <mat-label>Choose A Start Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="start_date" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>{{ this.validateEmployeeStartDate() }}</mat-error>
+    </mat-form-field>
+
+    <section formArrayName="skills" class="form_skills">
+      @for(skillGroup of skills.controls; track $index){
+      <div class="form_skills_info">
+        <div class="form_skills_inputs">
+          <mat-form-field
+            appearance="fill"
+            class="form_skills_input form_skills_skill"
+          >
+            <mat-label>Employee Skill</mat-label>
+            <input
+              matInput
+              id="skill"
+              type="text"
+              [formControl]="skillGroup.controls.skill"
+            />
+            <mat-error>{{ validateEmployeeSkillName($index) }}</mat-error>
+          </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            class="form_skills_input form_skills_experience"
+          >
+            <mat-label>Years of Skill Experience </mat-label>
+            <input
+              matInput
+              id="expirience"
+              type="number"
+              [formControl]="skillGroup.controls.yearExperience"
+            />
+            <mat-error>{{ validateEmployeeSkillExperience($index) }}</mat-error>
+          </mat-form-field>
+        </div>
+        <button matMiniFab type="button" (click)="removeSkill($index)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+      }
+    </section>
+
+    <button matButton="tonal" type="button" (click)="addSkillGroup()">
+      Add Skill
+    </button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="onClose()">Cancel</button>
+  <button matButton (click)="onCreate()" cdkFocusInitial>Create</button>
+</mat-dialog-actions>

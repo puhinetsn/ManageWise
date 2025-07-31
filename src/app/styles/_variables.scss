@@ -1,0 +1,34 @@
+@use "sass:map";
+
+$basic_font_size: 1rem;
+
+$font_size: (
+  "xs": $basic_font_size * 0.5,
+  "sm": $basic_font_size * 0.75,
+  "md": $basic_font_size,
+  "lg": $basic_font_size * 1.125,
+  "xl": $basic_font_size * 1.25,
+  "2xl": $basic_font_size * 1.5,
+  "3xl": $basic_font_size * 2.25,
+  "4xl": $basic_font_size * 3.25,
+);
+
+$font-weights: (
+  "regular": 400,
+  "medium": 500,
+  "bold": 700,
+);
+
+$font-colors: (
+  "primary": #407093,
+  "secondary": #787777,
+  "tertiary": #ffffff,
+);
+
+$breakpoints: (
+  "xs": 0,
+  "sm": 480px,
+  "md": 720px,
+  "lg": 960px,
+  "xl": 1200px,
+);

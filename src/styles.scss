@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@use "./app/styles/mixins" as *;
+@use "./app/styles/variables" as *;
+@use "sass:map";
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Montserrat,
+      density: 0,
+    )
+  );
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: Montserrat;
+}
+
+@each $name, $glyph in $font_size {
+  .text-#{$name},
+  .mat-typography .text-#{$name} {
+    font-size: $glyph;
+  }
+}
+
+@each $name, $glyph in $font-weights {
+  .text-#{$name},
+  .mat-typography .text-#{$name} {
+    font-weight: $glyph;
+  }
+}
+
+@each $name, $glyph in $font-colors {
+  .text-#{$name},
+  .mat-typography .text-#{$name} {
+    color: $glyph;
+  }
+}
