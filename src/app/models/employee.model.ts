@@ -1,6 +1,6 @@
 import { Skill } from './skill.model';
 
-interface Employee {
+export interface Employee {
   id: number;
   fullName: string;
   email: string;
@@ -8,3 +8,5 @@ interface Employee {
   skills: Skill[];
   startDate: Date;
 }
+
+export type EmployeeFields = Omit<Employee, 'id'>;

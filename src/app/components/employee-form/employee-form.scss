@@ -1,0 +1,56 @@
+@use "mixins" as *;
+@use "sass:map";
+.form {
+  &_container {
+    @include flex(column, flex-start);
+    gap: 10px;
+  }
+
+  &_title {
+    text-align: center;
+  }
+  &_input {
+    width: 100%;
+  }
+
+  &_skills {
+    @include flex(column, space-around);
+    width: 100%;
+    gap: 15px;
+    padding: 15px 0;
+    &_info {
+      @include flex(row, space-around);
+      width: 100%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      padding-top: 15px;
+    }
+    &_inputs {
+      @include flex(column, space-around);
+    }
+
+    &_input {
+      width: 100%;
+    }
+  }
+}
+
+@include md {
+  .form {
+    &_skills {
+      &_info {
+        padding: 20px 15px;
+        align-items: center;
+      }
+
+      &_inputs {
+        @include flex(row, space-around);
+      }
+
+      &_input {
+        width: 40%;
+      }
+    }
+  }
+}
