@@ -85,14 +85,14 @@ This is a small Angular application designed to manage a list of employees. It i
    npm install
    ```
 4. Run the application:
-```bash
+  ```bash
    ng serve
-```
+  ```
 
 5. Open your browser and go to:
-```
-http://localhost:4200
-```
+  ```
+  http://localhost:4200
+  ```
 
 ## Notes
 
