@@ -10,21 +10,22 @@
     @include flex(column, space-between);
     align-items: flex-start;
     gap: 5px;
-    height: max-content;
+    height: 100%;
+    width: 100%;
+    min-height: 200px;
   }
-
   &_skills {
     @include flex(row, flex-start);
     flex-wrap: wrap;
     gap: 5px;
     margin-top: 10px;
   }
-
   &_actions {
     width: 100%;
     @include flex(row, flex-end);
     gap: 20px;
     padding: 5px 0;
+    margin-top: auto;
   }
 }
 

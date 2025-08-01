@@ -17,6 +17,11 @@ export class Layout {
   readonly route = inject(ActivatedRoute);
   sortBy = signal<'name' | 'date' | 'skills' | undefined>(undefined);
   sortOrder = signal<'asc' | 'desc' | undefined>(undefined);
+  searchTerm = signal('');
+
+  onSearch(term: string) {
+    this.searchTerm.set(term);
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {

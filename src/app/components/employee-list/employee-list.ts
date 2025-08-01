@@ -24,6 +24,7 @@ export class EmployeeList implements OnInit, OnChanges {
   customActions = input<boolean>();
   sortOrder = input<'asc' | 'desc'>();
   sortBy = input<'name' | 'date' | 'skills'>();
+  searchTerm = input.required<string>();
   employeeService = inject(EmployeeService);
   employees = signal<Employee[]>([]);
   ngOnInit() {
@@ -33,9 +34,13 @@ export class EmployeeList implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['sortBy'] || changes['sortOrder']) {
+    if (changes['sortBy'] || changes['sortOrder'] || changes['searchTerm']) {
       this.employees.set(
-        this.employeeService.getEmployees(this.sortBy(), this.sortOrder())
+        this.employeeService.getEmployees(
+          this.sortBy(),
+          this.sortOrder(),
+          this.searchTerm()
+        )
       );
     }
   }

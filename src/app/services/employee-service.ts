@@ -40,9 +40,19 @@ export class EmployeeService {
 
   getEmployees(
     sortBy?: 'name' | 'date' | 'skills',
-    sortOrder?: 'asc' | 'desc'
+    sortOrder?: 'asc' | 'desc',
+    searchTerm?: string
   ): Employee[] {
-    const employeesCopy = [...this.employees()];
+    let employeesCopy = [...this.employees()];
+
+    if (searchTerm && searchTerm.trim().length >= 2) {
+      const term = searchTerm.trim().toLowerCase();
+      employeesCopy = employeesCopy.filter(
+        (e) =>
+          e.fullName.toLowerCase().includes(term) ||
+          e.email.toLowerCase().includes(term)
+      );
+    }
 
     if (!sortBy || !sortOrder) {
       return employeesCopy;

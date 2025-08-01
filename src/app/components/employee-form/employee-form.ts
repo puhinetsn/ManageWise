@@ -240,7 +240,17 @@ export class EmployeeForm {
     return '';
   }
 
-  onCreate(): void {
-    this.dialogRef.close(this.employee.value);
+  onCreate() {
+    const skills = this.employee.value.skills ?? [];
+    const filteredSkills = skills.filter(
+      (skill): skill is { skill: string; yearExperience: number } =>
+        typeof skill.skill === 'string' && skill.skill.trim().length > 0
+    );
+    const formValue = {
+      ...this.employee.value,
+      skills: filteredSkills,
+    };
+
+    this.dialogRef.close(formValue);
   }
 }

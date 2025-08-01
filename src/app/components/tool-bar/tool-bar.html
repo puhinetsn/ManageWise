@@ -2,7 +2,13 @@
   <div class="toolbar_form">
     <mat-form-field class="toolbar_form_input">
       <mat-label>Search employees by full name or email...</mat-label>
-      <input matInput placeholder="Ex. John Doe" />
+
+      <input
+        matInput
+        #searchQuery
+        placeholder="Ex. John Doe"
+        [formControl]="searchControl"
+      />
     </mat-form-field>
   </div>
 
