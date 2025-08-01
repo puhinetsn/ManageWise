@@ -5,6 +5,8 @@
   &_container {
     width: 100%;
     padding: 20px 10px;
+    @include flex(column, center);
+    gap: 15px;
   }
 }
 

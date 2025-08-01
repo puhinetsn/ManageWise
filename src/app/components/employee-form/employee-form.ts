@@ -1,9 +1,4 @@
-import {
-  Component,
-  inject,
-  ChangeDetectionStrategy,
-  input,
-} from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormArray,
   FormBuilder,

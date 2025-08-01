@@ -13,6 +13,7 @@ import {
   MatSlideToggleChange,
   MatSlideToggleModule,
 } from '@angular/material/slide-toggle';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tool-bar',
@@ -37,6 +38,7 @@ export class ToolBar {
   customInfoChanged = output<boolean>();
   customActions = input.required<boolean>();
   customActionsChanged = output<boolean>();
+  router = inject(Router);
 
   showSkillsCheck($event: MatSlideToggleChange) {
     this.showSkillsChanged.emit($event.checked);
@@ -48,6 +50,13 @@ export class ToolBar {
 
   customActionsCheck($event: MatSlideToggleChange) {
     this.customActionsChanged.emit($event.checked);
+  }
+
+  sortBy(field: 'name' | 'date' | 'skills', order: 'asc' | 'desc') {
+    this.router.navigate([], {
+      queryParams: { sortBy: field, sortOrder: order },
+      queryParamsHandling: 'merge',
+    });
   }
 
   openDialog() {
