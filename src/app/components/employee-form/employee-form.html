@@ -1,5 +1,5 @@
 <h3 mat-dialog-title class="form_title">
-  Enter Information About New Employee
+  {{ isEditMode ? "Edit Employee" : "Enter Information About New Employee" }}
 </h3>
 <mat-dialog-content>
   <form [formGroup]="employee" class="form_container">
@@ -84,5 +84,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button matButton (click)="onClose()">Cancel</button>
-  <button matButton (click)="onCreate()" cdkFocusInitial>Create</button>
+  <button matButton (click)="onCreate()" cdkFocusInitial>
+    {{ isEditMode ? "Update" : "Create" }}
+  </button>
 </mat-dialog-actions>

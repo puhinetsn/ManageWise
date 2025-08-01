@@ -41,4 +41,24 @@ export class EmployeeService {
   getEmployees(): Employee[] {
     return this.employees();
   }
+
+  removeEmployee(index: number) {
+    this.employees.update((current) =>
+      current.filter((employee) => employee.id !== index)
+    );
+    localStorage.setItem('employees', JSON.stringify(this.employees()));
+  }
+
+  editEmployee(info: Employee) {
+    console.log(info);
+    this.employees.update((current) => {
+      console.log('Current:', current);
+      return current.map((emp) => {
+        console.log('Comparing', emp.id, 'with', info.id);
+        return emp.id === info.id ? { ...info } : emp;
+      });
+    });
+
+    localStorage.setItem('employees', JSON.stringify(this.employees()));
+  }
 }

@@ -18,6 +18,5 @@ export class EmployeeList implements OnInit {
   employees = signal<Employee[]>([]);
   ngOnInit() {
     this.employees.set(this.employeeService.getEmployees());
-    console.log(this.employees());
   }
 }

@@ -16,11 +16,21 @@
     }
   </div>
   } @if(customActions()){
-  <ng-container *ngTemplateOutlet="actionsTemplate()"> </ng-container>
+  <ng-container
+    [ngTemplateOutlet]="actionsTemplate()"
+    [ngTemplateOutletContext]="{
+      openDialog: openDialog.bind(this),
+      removeEmployee: removeEmployee.bind(this),
+      id: employee().id
+    }"
+  ></ng-container>
+
   }@else {
   <div class="card_actions">
-    <mat-icon class="text-secondary">edit</mat-icon>
-    <mat-icon class="text-secondary">delete</mat-icon>
+    <mat-icon class="text-secondary" (click)="openDialog()">edit</mat-icon>
+    <mat-icon class="text-secondary" (click)="removeEmployee(employee().id)"
+      >delete</mat-icon
+    >
   </div>
   }
 </div>

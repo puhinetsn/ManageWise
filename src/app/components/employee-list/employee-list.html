@@ -28,9 +28,14 @@
   </div>
 </ng-template>
 
-<ng-template #cardActionsTemplate>
+<ng-template
+  #cardActionsTemplate
+  let-openDialog="openDialog"
+  let-removeEmployee="removeEmployee"
+  let-id="id"
+>
   <div class="template_actions">
-    <p class="text-secondary">edit</p>
-    <p class="text-secondary">delete</p>
+    <p class="text-secondary" (click)="openDialog()">edit</p>
+    <p class="text-secondary" (click)="removeEmployee(id)">delete</p>
   </div>
 </ng-template>

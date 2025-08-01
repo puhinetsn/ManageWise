@@ -1,4 +1,9 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  ChangeDetectionStrategy,
+  input,
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -7,6 +12,7 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
@@ -20,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Position } from '../../models/position.enum';
+import { Employee } from '../../models/employee.model';
 
 interface PositionSelectOption {
   value: Position;
@@ -47,6 +54,8 @@ interface PositionSelectOption {
 })
 export class EmployeeForm {
   readonly dialogRef = inject(MatDialogRef<EmployeeForm>);
+  data = inject<Employee>(MAT_DIALOG_DATA);
+  isEditMode = !!this.data;
   formBuilder = inject(FormBuilder);
   employee = new FormGroup({
     fullName: new FormControl<string>('', {
@@ -83,6 +92,39 @@ export class EmployeeForm {
       }),
     ]),
   });
+
+  constructor() {
+    if (this.isEditMode && this.data) {
+      this.employee.patchValue({
+        fullName: this.data.fullName,
+        email: this.data.email,
+        position: this.data.position as Position,
+        startDate: this.data.startDate,
+      });
+
+      const skillsArray = this.employee.controls.skills as FormArray;
+      skillsArray.clear();
+
+      if (this.data.skills && this.data.skills.length) {
+        this.data.skills.forEach((skill) => {
+          skillsArray.push(
+            new FormGroup({
+              skill: new FormControl<string>(skill.skill, {
+                nonNullable: true,
+                validators: [Validators.required],
+              }),
+              yearExperience: new FormControl<number>(skill.yearExperience, {
+                nonNullable: true,
+                validators: [Validators.required, Validators.min(0)],
+              }),
+            })
+          );
+        });
+      } else {
+        this.addSkillGroup();
+      }
+    }
+  }
 
   addSkillGroup() {
     let skills = <FormArray>this.employee.controls.skills;
