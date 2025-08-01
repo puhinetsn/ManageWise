@@ -1,0 +1,35 @@
+@use "mixins" as *;
+@use "sass:map";
+
+.employees {
+  &_container {
+    width: 100%;
+    padding: 20px 10px;
+  }
+}
+
+@include md {
+  .employees {
+    &_container {
+      padding: 50px;
+      @include flex(row, space-between);
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.template {
+  &_info {
+    @include flex(column, center);
+    width: 100%;
+  }
+
+  &_actions {
+    @include flex(row, flex-start);
+    width: 100%;
+    gap: 20px;
+    padding: 15px;
+    cursor: pointer;
+  }
+}

@@ -2,6 +2,8 @@
 
 $basic_font_size: 1rem;
 
+$basic_shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 $font_size: (
   "xs": $basic_font_size * 0.5,
   "sm": $basic_font_size * 0.75,

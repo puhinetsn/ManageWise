@@ -7,10 +7,10 @@
   </div>
 
   <div class="toolbar_employees">
-    <button matFab [matMenuTriggerFor]="menu">
+    <button matFab [matMenuTriggerFor]="filterMenu">
       <mat-icon>filter_alt</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu #filterMenu="matMenu">
       <button mat-menu-item>
         <span>Name (asc/desc)</span>
       </button>
@@ -19,6 +19,46 @@
       </button>
       <button mat-menu-item>
         <span>Number of skills</span>
+      </button>
+    </mat-menu>
+
+    <button
+      matIconButton
+      [matMenuTriggerFor]="customMenu"
+      [matMenuTriggerData]="{ disableClose: true }"
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #customMenu="matMenu" class="toolbar_toggle">
+      <button mat-menu-item>
+        <mat-slide-toggle
+          class="toolbar_employees_toggle"
+          (change)="customInfoCheck($event)"
+          [checked]="customInfo()"
+          (click)="$event.stopPropagation()"
+        >
+          Custom Info
+        </mat-slide-toggle>
+      </button>
+      <button mat-menu-item>
+        <mat-slide-toggle
+          class="toolbar_employees_toggle"
+          (change)="showSkillsCheck($event)"
+          [checked]="showSkills()"
+          (click)="$event.stopPropagation()"
+        >
+          Show Skills
+        </mat-slide-toggle>
+      </button>
+      <button mat-menu-item>
+        <mat-slide-toggle
+          class="toolbar_employees_toggle"
+          (change)="customActionsCheck($event)"
+          [checked]="customActions()"
+          (click)="$event.stopPropagation()"
+        >
+          Custom Actions
+        </mat-slide-toggle>
       </button>
     </mat-menu>
 

@@ -1,11 +1,11 @@
 <h3 mat-dialog-title class="form_title">
-  Enter Information About New Employee
+  {{ isEditMode ? "Edit Employee" : "Enter Information About New Employee" }}
 </h3>
 <mat-dialog-content>
   <form [formGroup]="employee" class="form_container">
     <mat-form-field appearance="fill" class="form_input">
       <mat-label>Employee Full Name</mat-label>
-      <input matInput id="name" type="text" formControlName="full_name" />
+      <input matInput id="name" type="text" formControlName="fullName" />
       <mat-error>{{ this.validateEmployeeFullName() }}</mat-error>
     </mat-form-field>
 
@@ -29,7 +29,7 @@
 
     <mat-form-field class="form_input">
       <mat-label>Choose A Start Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="start_date" />
+      <input matInput [matDatepicker]="picker" formControlName="startDate" />
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker"
@@ -84,5 +84,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button matButton (click)="onClose()">Cancel</button>
-  <button matButton (click)="onCreate()" cdkFocusInitial>Create</button>
+  <button matButton (click)="onCreate()" cdkFocusInitial>
+    {{ isEditMode ? "Update" : "Create" }}
+  </button>
 </mat-dialog-actions>

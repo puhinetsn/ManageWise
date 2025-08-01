@@ -1,2 +1,14 @@
 <app-header></app-header>
-<app-tool-bar></app-tool-bar>
+<app-tool-bar
+  [showSkills]="showSkills()"
+  [customActions]="customActions()"
+  [customInfo]="customInfo()"
+  (showSkillsChanged)="showSkillsChanged($event)"
+  (customActionsChanged)="showCustomActions($event)"
+  (customInfoChanged)="showCustomInfo($event)"
+></app-tool-bar>
+<app-employee-list
+  [showSkills]="showSkills()"
+  [customActions]="customActions()"
+  [customInfo]="customInfo()"
+></app-employee-list>
