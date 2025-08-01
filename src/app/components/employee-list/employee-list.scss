@@ -24,7 +24,7 @@
 @include md {
   .employees {
     &_container {
-      padding: 50px;
+      padding: 50px 120px;
       @include flex(row, flex-start);
       gap: 30px;
       flex-wrap: wrap;
