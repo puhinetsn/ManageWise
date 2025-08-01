@@ -2,7 +2,13 @@
   <div class="toolbar_form">
     <mat-form-field class="toolbar_form_input">
       <mat-label>Search employees by full name or email...</mat-label>
-      <input matInput placeholder="Ex. John Doe" />
+
+      <input
+        matInput
+        #searchQuery
+        placeholder="Ex. John Doe"
+        [formControl]="searchControl"
+      />
     </mat-form-field>
   </div>
 
@@ -12,13 +18,51 @@
     </button>
     <mat-menu #filterMenu="matMenu">
       <button mat-menu-item>
-        <span>Name (asc/desc)</span>
+        <span class="toolbar_sortBy">
+          Name:
+          <div class="toolbar_sortBy_order">
+            <mat-icon (click)="sortBy('name', 'asc'); $event.stopPropagation()">
+              arrow_upward
+            </mat-icon>
+            <mat-icon
+              (click)="sortBy('name', 'desc'); $event.stopPropagation()"
+            >
+              arrow_downward
+            </mat-icon>
+          </div>
+        </span>
       </button>
       <button mat-menu-item>
-        <span>Start Date</span>
+        <span class="toolbar_sortBy"
+          >Start Date
+          <div class="toolbar_sortBy_order">
+            <mat-icon (click)="sortBy('date', 'asc'); $event.stopPropagation()">
+              arrow_upward
+            </mat-icon>
+            <mat-icon
+              (click)="sortBy('date', 'desc'); $event.stopPropagation()"
+            >
+              arrow_downward
+            </mat-icon>
+          </div>
+        </span>
       </button>
       <button mat-menu-item>
-        <span>Number of skills</span>
+        <span class="toolbar_sortBy"
+          >Number of skills
+          <div class="toolbar_sortBy_order">
+            <mat-icon
+              (click)="sortBy('skills', 'asc'); $event.stopPropagation()"
+            >
+              arrow_upward
+            </mat-icon>
+            <mat-icon
+              (click)="sortBy('skills', 'desc'); $event.stopPropagation()"
+            >
+              arrow_downward
+            </mat-icon>
+          </div>
+        </span>
       </button>
     </mat-menu>
 

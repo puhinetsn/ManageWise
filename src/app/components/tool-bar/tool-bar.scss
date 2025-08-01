@@ -23,6 +23,18 @@
     @include flex(row, space-around);
     width: 100%;
   }
+
+  &_sortBy {
+    @include flex(row, space-between);
+
+    &_order {
+      @include flex(row, space-around);
+    }
+
+    &_order .mat-icon {
+      margin: 5px;
+    }
+  }
 }
 
 @include md {

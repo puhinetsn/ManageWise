@@ -6,9 +6,13 @@
   (showSkillsChanged)="showSkillsChanged($event)"
   (customActionsChanged)="showCustomActions($event)"
   (customInfoChanged)="showCustomInfo($event)"
+  (searchChanged)="onSearch($event)"
 ></app-tool-bar>
 <app-employee-list
   [showSkills]="showSkills()"
   [customActions]="customActions()"
   [customInfo]="customInfo()"
+  [sortBy]="sortBy()"
+  [sortOrder]="sortOrder()"
+  [searchTerm]="searchTerm()"
 ></app-employee-list>

@@ -38,8 +38,51 @@ export class EmployeeService {
     }
   }
 
-  getEmployees(): Employee[] {
-    return this.employees();
+  getEmployees(
+    sortBy?: 'name' | 'date' | 'skills',
+    sortOrder?: 'asc' | 'desc',
+    searchTerm?: string
+  ): Employee[] {
+    let employeesCopy = [...this.employees()];
+
+    if (searchTerm && searchTerm.trim().length >= 2) {
+      const term = searchTerm.trim().toLowerCase();
+      employeesCopy = employeesCopy.filter(
+        (e) =>
+          e.fullName.toLowerCase().includes(term) ||
+          e.email.toLowerCase().includes(term)
+      );
+    }
+
+    if (!sortBy || !sortOrder) {
+      return employeesCopy;
+    }
+
+    return employeesCopy.sort((a, b) => {
+      let valueA: string | number | Date;
+      let valueB: string | number | Date;
+
+      switch (sortBy) {
+        case 'name':
+          valueA = a.fullName.toLowerCase();
+          valueB = b.fullName.toLowerCase();
+          break;
+        case 'date':
+          valueA = new Date(a.startDate);
+          valueB = new Date(b.startDate);
+          break;
+        case 'skills':
+          valueA = a.skills?.length || 0;
+          valueB = b.skills?.length || 0;
+          break;
+        default:
+          return 0;
+      }
+
+      if (valueA < valueB) return sortOrder === 'asc' ? -1 : 1;
+      if (valueA > valueB) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
   }
 
   removeEmployee(index: number) {
